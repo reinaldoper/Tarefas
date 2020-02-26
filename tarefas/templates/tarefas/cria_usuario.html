@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <div class="page-header">
+        <h2>Criação de Usuário</h2>
+    </div>
+    <a class="btn btn-primary" href="/">Voltar</a>
+    <form method="POST" action=".">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div class="form-group">
+        <label for="{{ field.id_for_label }}" class="label-control">
+        {{ field.label }}
+        {% if field.field.required %}*{% endif %}
+        </label>
+        {{ field }}
+        {% if field.errors %}
+        <div class="alert alert-danger">{{ field.errors }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <button type=submit class="btn btn-primary">Criar</button>
+    </form>
+    <script>
+    $("input").addClass("form-control");
+    </script>
+    {% endblock %}
+</body>
+</html>

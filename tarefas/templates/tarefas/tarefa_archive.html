@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de tarefas</title>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <div class="page_header">
+    <h2>Minhas Tarefas</h2>
+    </div>
+    <a class="btn btn-primary" href="/">Voltar</a>
+    <a class="btn btn-primary" href="/tarefas/criar/">Adicionar Tarefas</a>
+    <table>
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de criação</th>
+                <th>Status</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in latest %}
+        <tr>
+        <td><a href="/tarefas/{{ item.pk }}">{{ item.nome }}</a></td>
+            <td>{{ item.data_de_criacao|date:"d/m/Y H:i" }}</td>
+            <td>{% if item.status %}Finalizado{% else %}Aberto{% endif %}
+            </td>
+            <td>{{ item.usuario }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </table>
+    {% endblock %}
+</body>
+</html>
